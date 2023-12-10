@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Caveat:wght@400;700&family=Lobster&family=Monoton&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,700&family=Work+Sans:ital,wght@0,400;0,700;1,700&display=swap');
+.img1{
+    height: 200px;
+    width: 300px;
+    margin: 10px;
+    border-radius: 25px;
+    border-color: yellow;
+    margin-left: 80px;
+}
+.card1{
+    text-align: center;
+    background-size: cover;
+}
+nav
+{
+width: 100%;
+height: 80px;
+background-color: #0005;
+opacity:1.0;
+Line-height: 80px;
+}
+
+body {
+    background: url("images/hero-bg.jpg") center/cover no-repeat;
+}
+#box{
+    margin-top: 100px;
+    font-family:bold ;
+    font-size: 40px;
+}

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Contact Form</title>
+    <link rel="stylesheet" href="css/regs.css" type="text/css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<style>
+      body{
+        background-size: auto;
+         background-position:unset;
+         background: url("bgi.jpg") center/cover no-repeat;
+         text-align: center;
+         /* background-repeat: ; */
+      }
+      input#psw{
+    width:300px;
+    border:1px solid #ddd;
+    border-radius: 3px;
+    outline: 0;
+    padding: 7px;
+    background-color: #fff;
+    box-shadow:inset 1px 1px 5px rgba(0,0,0,0.3);
+}
+.cont{
+  width: 400px;
+  height: 650px;
+  text-align: center;
+  background-color: rgb(145, 227, 227);
+  margin-top: 150px;
+  margin-left: 550px;
+  opacity: 0.85;
+  border-radius: 10px;
+}
+input#cpsw{
+    width:300px;
+    border:1px solid #ddd;
+    border-radius: 3px;
+    outline: 0;
+    padding: 7px;
+    background-color: #fff;
+    box-shadow:inset 1px 1px 5px rgba(0,0,0,0.3);
+}
+  #message {
+  display:none;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  padding: 20px;
+  
+  width: 400px;
+  margin-left:1000px;
+  margin-top: -500px;
+}
+
+#message p {
+  padding: 10px 35px;
+  font-size: 18px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+}
+
+/* Add a red text color and an "x" icon when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
+}
+  .btn {
+  padding: 10px;
+  font-size: 15px;
+  color: white;
+  background: #d3b36c;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+}</style> 
+<header>
+  <nav class="navbar">
+      <span class="hamburger-btn material-symbols-rounded">menu</span>
+      <a href="#" class="logo">
+          <img src="logo.jpg" alt="logo">
+          <h2>DreamCraft</h2>
+      </a>
+      <ul class="links">
+          <span class="close-btn material-symbols-rounded">close</span>
+          <li><a href="Untitled-1.html">HOME</a></li>
+          <li><a href="Service.html">SERVICES</a></li>
+          <li><a href="gallery.html">GALLERY</a></li>
+          <li><a href="about3.html">ABOUT US</a></li>
+          <li><a href="review.html">REVIEWS</a></li>
+          <li><a href="CONTACT US.html">CONTACT US</a></li>
+      </ul>
+  </nav>
+</header>
+
+<?php
+require_once('connection.php');
+
+if (isset($_POST['submit'])) {
+    $email = mysqli_real_escape_string($con, $_POST['email']);
+    $contactno = mysqli_real_escape_string($con, $_POST['contactno']);
+    $typeofevent = mysqli_real_escape_string($con, $_POST['typeofevent']);
+    $date = mysqli_real_escape_string($con, $_POST['date']);
+    $venue = mysqli_real_escape_string($con, $_POST['venue']);
+    $food = mysqli_real_escape_string($con, $_POST['food']);
+    $noofguests = mysqli_real_escape_string($con, $_POST['noofguests']);
+
+    if (empty($email) || empty($contactno) || empty($typeofevent) || empty($date) || empty($venue) || empty($food) || empty($noofguests)) {
+        echo '<script>alert("Please fill all the fields")</script>';
+    } else {
+        $sql_insert = "INSERT INTO users (email, contactno, typeofevent, date, venue, food, noofguests) 
+                        VALUES ('$email', '$contactno', '$typeofevent', '$date', '$venue', '$food', '$noofguests')";
+        $result_insert = mysqli_query($con, $sql_insert);
+
+        if ($result_insert) {
+            echo '<script>alert("Form submitted successfully")</script>';
+        } else {
+            echo '<script>alert("Error submitting form. Please check the connection")</script>';
+        }
+    }
+}
+?>
+
+<div class="main">
+    <div class="cont">
+      <div class="register">
+        <h2>Contact Form</h2>
+         <br><br>
+
+        <form action="contact_form.php" method="POST">
+            <label>Email:</label>
+            <input type="email" name="email" required>
+            <br><br><br>
+
+            <label>Contact No:</label>
+            <input type="text" name="contactno" required>
+            <br><br><br>
+
+            <label>Type of Event:</label>
+            <select name="typeofevent" required>
+                 <option value=""></option>
+                <option value="BIRTH DAY ">BIRTH DAY CELEBRATION</option>
+                <option value="MARRIAGE">MARRIAGE</option>
+                <option value="CORPORATE EVENTS">COPERATE EVENTS</option>
+                <option value="SOCIAL EVENTS">SOCIAL EVENTS</option>
+                <option value="CULTURAL EVENTS">CULTURAL EVENTS</option>
+                <option value="FAMILY REUNIONS">FAMILY REUNIONS</option>
+                <option value="PERSONAL MILESTONES">PERSONAL MILESTONES</option>
+
+
+
+
+
+            </select>
+            <br><br><br>
+
+            <label>Date:</label>
+            <input type="date" name="date" required>
+            <br><br><br>
+
+            <label>Select Your Venue:</label>
+            <select name="venue" required>
+                <option value=""></option>
+                
+<option value = "CONVENTION CENTERS">CONVENTION CENTERS
+              </option>  
+              <option value = "HOTELS">HOTELS  
+              </option>  
+              <option value = "RESORTS">RESORTS
+              </option>  
+               <option value = "COLLEGE/UNIVERSITIES">COLLEGE/UNIVERSITIES
+              </option> 
+            </select>
+            <br><br><br>
+
+            <label>Select Your Food:</label>
+            <select name="food" required>
+                <option value=""></option>
+                <option value="CHINESE CUISINE">CHINESE CUISINE</option>
+               <option value="ITALIAN CUISINE">ITALIAN CUISINE</option>
+                <option value="INDIAN ">INDIAN</option>
+                <option value="FRENCH CUISINE">FRENCH CUISINE</option>
+                <option value="JAPANESE">JAPANESE</option>
+                <option value="THAI">THAI</option>
+                <option value="SPANISH">SPANISH</option>
+                
+            </select>
+            <br><br><br>
+
+            <label>No. of Guests:</label>
+            <input type="text" name="noofguests" required>
+            <br><br><br>
+<div class="input-group">
+            <button type="submit" class="btn" name="login_user"><b><a href="index.html">Submit</a></b></button>
+          </div>
+           
+        </form>
+    </div>
+</div>
+
+<div id="message">
+  <h3>Password must contain the following:</h3>
+  <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+  <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+  <p id="number" class="invalid">A <b>number</b></p>
+  <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+</div>
+<script>
+var myInput = document.getElementById("email");
+var letter = document.getElementById("contactno");
+var capital = document.getElementById("typeofevent");
+var number = document.getElementById("date");
+var length = document.getElementById("venue");
+var length = document.getElementById("noofguest");
+var length = document.getElementById("food");
+
+// When the user clicks on the password field, show the message box
+myInput.onfocus = function() {
+  document.getElementById("message").style.display = "block";
+}
+
+// When the user clicks outside of the password field, hide the message box
+myInput.onblur = function() {
+  document.getElementById("message").style.display = "none";
+}
+
+// When the user starts to type something inside the password field
+myInput.onkeyup = function() {
+  // Validate lowercase letters
+  var lowerCaseLetters = /[a-z]/g;
+  if(myInput.value.match(lowerCaseLetters)) {
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+}
+
+  // Validate capital letters
+  var upperCaseLetters = /[A-Z]/g;
+  if(myInput.value.match(upperCaseLetters)) {
+    capital.classList.remove("invalid");
+    capital.classList.add("valid");
+  } else {
+    capital.classList.remove("valid");
+    capital.classList.add("invalid");
+  }
+
+  // Validate numbers
+  var numbers = /[0-9]/g;
+  if(myInput.value.match(numbers)) {
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+  }
+// Validate length
+  if(myInput.value.length >= 8) {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
+}
+</script>  
+<script>
+    function onlyNumberKey(evt) {
+          
+        // Only ASCII character in that range allowed
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
+    }
+</script>
+</body>
+</html>
